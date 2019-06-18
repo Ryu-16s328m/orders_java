@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>受発注登録確認画面</title>
+</head>
+<body>
+	<p th:inline="text">注文商品名　:　[[${oPName}]]</p>
+	<p th:inline="text">商品単価　:　[[${oPPrice}]]</p>
+	<p th:inline="text">更新日時　:　[[${updateDate}]]</p>
+	<p th:inline="text">登録日時　:　[[${registDate}]]</p>
+	<p th:inline="text">発注先会社ID　:　[[${comId}]]</p>
+	<p th:inline="text">発注品名　:　[[${oIName}]]</p>
+	<p th:inline="text">発注数　:　[[${oCount}]]</p>
+	<p th:inline="text">発注単価　:　[[${oPrice}]]</p>
+	<p th:inline="text">顧客名　:　[[${cusName}]]</p>
+	<p th:inline="text">顧客住所　:　[[${cusAddress}]]</p>
+	<p th:inline="text">顧客電話番号　:　[[${cusTel}]]</p>
+	<form action="/orders/doRegist" method="post">
+		<input type="hidden" name="oPId" th:value="${oPId}">
+		<input type="hidden" name="oPName" th:value="${oPName}">
+		<input type="hidden" name="oPPrice" th:value="${oPPrice}">
+		<input type="hidden" name="comId" th:value="${comId}">
+		<input type="hidden" name="oIName" th:value="${oIName}">
+		<input type="hidden" name="oCount" th:value="${oCount}">
+		<input type="hidden" name="oPrice" th:value="${oPrice}">
+		<input type="hidden" name="cusName" th:value="${cusName}">
+		<input type="hidden" name="cusAddress" th:value="${cusAddress}">
+		<input type="hidden" name="cusTel" th:value="${cusTel}">
+		<input type="submit" value="登録">
+	</form>
+	<form action="/orders/backToRegistView" method="post">
+		<input type="hidden" name="oPId" th:value="${oPId}">
+		<input type="hidden" name="oPName" th:value="${oPName}">
+		<input type="hidden" name="oPPrice" th:value="${oPPrice}">
+		<input type="hidden" name="comId" th:value="${comId}">
+		<input type="hidden" name="oIName" th:value="${oIName}">
+		<input type="hidden" name="oCount" th:value="${oCount}">
+		<input type="hidden" name="oPrice" th:value="${oPrice}">
+		<input type="hidden" name="cusName" th:value="${cusName}">
+		<input type="hidden" name="cusAddress" th:value="${cusAddress}">
+		<input type="hidden" name="cusTel" th:value="${cusTel}">
+		<input type="submit" value="戻る">
+	</form>
+</body>
+</html>

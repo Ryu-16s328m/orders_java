@@ -1,0 +1,32 @@
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>受発注削除確認画面</title>
+</head>
+<body>
+	<h1 th:inline="text">注文商品ID　:　[[${oPId}]]</h1>
+	<p th:inline="text">注文商品名　:　[[${oPName}]]</p>
+	<p th:inline="text">商品単価　:　[[${oPPrice}]]</p>
+	<p th:inline="text">更新日時　:　[[${oPUpdateDate}]]</p>
+	<p th:inline="text">登録日時　:　[[${oPRegistDate}]]</p>
+	<p th:inline="text">発注先会社ID　:　[[${comId}]]</p>
+	<p th:inline="text">発注先会社名　:　[[${oPPrice}]]</p>
+	<p th:inline="text">発注品名　:　[[${oIName}]]</p>
+	<p th:inline="text">発注数　:　[[${oCount}]]</p>
+	<p th:inline="text">発注単価　:　[[${oPrice}]]</p>
+	<p th:inline="text">顧客名　:　[[${cusName}]]</p>
+	<p th:inline="text">顧客住所　:　[[${cusAddress}]]</p>
+	<p th:inline="text">顧客電話番号　:　[[${cusTel}]]</p>
+	<form action="/orders/doDelete" method="get">
+		<input type="hidden" name="oPId" th:value="${oPId}">
+		<input type="submit" value="削除実行">
+	</form>
+	<form action="/orders/detail" method="get">
+		<input type="hidden" name="id" th:value="${oPId}">
+		<input type="submit" value="戻る">
+	</form>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>サインアップ</title>
+</head>
+<body>
+<div th:object="${form}">
+	<form action="/users/signupConfirm" method="post">
+    	<p>苗字<input type="text" name="lastName" th:value="${lastName}"></p>
+    	<label th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" ></label>
+    	<p>名前<input type="text" name="firstName" th:value="${firstName}"></p>
+    	<label th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" ></label>
+    	<p>メールアドレス<input type="text" name="email" th:value="${email}"></p>
+    	<label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" ></label>
+    	<p>パスワード<input type="password" name="password"></p>
+    	<label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" ></label>
+    	<input type="submit" value="確認画面に進む">
+    </form>
+</div>
+    <form action="/orders" method="get">
+    	<input type="submit" value="戻る">
+    </form>
+</body>                                                                                           
+</html>

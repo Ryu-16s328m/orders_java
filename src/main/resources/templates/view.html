@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>受発注検索一覧画面</title>
+</head>
+<body>
+	<h1 th:inline="text">ようこそ、<a href="http://localhost:8080/users/detail"><span th:text="${@loginSession.getFullName()}"></span></a>様</h1>
+	
+	<form action="/orders/regist" method="get">
+		<input type="submit" value="新規登録">
+	</form>
+	<form role="form" id="logout" th:action="@{/logout}" method="post">
+    	<button type="submit">ログアウト</button>
+	</form>
+	<h1>検索</h1>
+	<form action="/orders" method="get">
+			<p>
+				注文商品ID
+				<select name="oPId" th:value="${oPId}">
+				<option>--</option>
+    			<option th:each="ids : ${idsList}" th:text="${ids}" th:selected="${id}==${ids}"></option>
+			</select>
+			</p>
+			<p>
+				注文商品名<input type="text" name="oPName" th:value="${oPName}">
+			</p>
+			<p>
+				単価(from)<input type="text" name="fromPrice" th:value="${fromPrice}">
+			</p>
+			<p>
+				単価(to)<input type="text" name="toPrice" th:value="${toPrice}">
+			</p>
+			<p>
+				顧客名<input type="text" name="customerName" th:value="${customerName}">
+			</p>
+			<p>
+				発注先名<input type="text" name="companyName" th:value="${companyName}">
+			</p>
+			<p>
+				受発注情報登録日
+			</p>
+			<div th:switch="${sortDate}">
+				<p th:case="2">降順<input type="radio" name="sortDate" th:value="1">昇順<input type="radio" name="sortDate" th:value="2" checked></p>
+				<p th:case="*">降順<input type="radio" name="sortDate" th:value="1" checked>昇順<input type="radio" name="sortDate" th:value="2"></p>
+			</div>
+			<input type="submit" value="検索">
+	</form>
+	<h1>一覧</h1>
+	<div th:if="${oPEntityList}" th:each="entity : ${oPEntityList}">
+		<p th:inline="text">注文商品ID： [[ ${entity.getOrderProductsId()} ]]</p>
+		<p th:inline="text">注文商品名： [[ ${entity.getOrderProductsName()} ]]</p>
+		<p th:inline="text">商品単価： [[ ${entity.getPrice()} ]]</p>
+		<p th:inline="text">顧客名： [[ ${entity.getReceivingOrdersEntity().getCustomerName()} ]]</p>
+		<p th:inline="text">発注先名： [[ ${entity.getOrdersEntity().getCompaniesEntity().getCompanyName()} ]]</p>
+		<p th:inline="text">受発注情報登録日： [[ ${entity.getRegistrationDate()} ]]</p>
+		<form action="/orders/detail" method="GET">
+			<input type="hidden" name="id" th:value="${entity.getOrderProductsId()}" />
+			<input type="submit" value="詳細を見る">
+		</form>
+	</div>
+	<div th:unless="${oPEntityList.totalPages}==0">
+		<div th:if="${oPEntityList}">
+			<ul>
+        		<li style="display:inline">
+          		  <a th:href="@{${url}(page=0,(oPId=${oPId}),(oPName=${oPName}),(fromPrice=${fromPrice}),(toPrice=${toPrice}),(customerName=${customerName}),(companyName=${companyName}),(sortDate=${sortDate}))}">←先頭</a>
+        		</li>
+        		<li th:each="i : ${#numbers.sequence(0, oPEntityList.totalPages-1)}" style="display:inline">
+        		    <span th:if="${i}==${oPEntityList.number}" th:text="${i + 1}"></span>
+        		    <a th:if="${i}!=${oPEntityList.number}" th:href="@{${url}(page=${i},(oPId=${oPId}),(oPName=${oPName}),(fromPrice=${fromPrice}),(toPrice=${toPrice}),(customerName=${customerName}),(companyName=${companyName}),(sortDate=${sortDate}))}" th:text="${i + 1}"></a>
+        		</li>
+ 
+        		<li style="display:inline">
+          		<a th:href="@{${url}(page=(${oPEntityList.totalPages}-1),(oPId=${oPId}),(oPName=${oPName}),(fromPrice=${fromPrice}),(toPrice=${toPrice}),(customerName=${customerName}),(companyName=${companyName}),(sortDate=${sortDate}))}">末尾➝</a>
+        		</li>
+    		</ul>
+		</div>
+	</div>
+</body>
+</html>

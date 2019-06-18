@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>受発注詳細画面</title>
+</head>
+<body>
+	<div>
+		<p th:inline="text">注文商品ID　:　[[${oPEntity.getOrderProductsId()}]]</p>
+		<p th:inline="text">注文商品名　:　[[${oPEntity.getOrderProductsName()}]]</p>
+		<p th:inline="text">商品単価　:　[[${oPEntity.getPrice()}]]</p>
+		<p th:inline="text">更新日時　:　[[${oPEntity.getUpdateDate()}]]</p>
+		<p th:inline="text">登録日時　:　[[${oPEntity.getRegistrationDate()}]]</p>
+	</div>
+	<div>
+		<p th:inline="text">発注先会社ID　:　[[${oPEntity.getOrdersEntity().getCompanyId()}]]</p>
+		<p th:inline="text">発注先会社名　:　[[${oPEntity.getOrdersEntity().getCompaniesEntity().getCompanyName()}]]</p>
+		<p th:inline="text">発注品名　:　[[${oPEntity.getOrdersEntity().getOrderItemName()}]]</p>
+		<p th:inline="text">発注数　:　[[${oPEntity.getOrdersEntity().getOrderCount()}]]</p>
+		<p th:inline="text">発注単価　:　[[${oPEntity.getOrdersEntity().getOrderPrice()}]]</p>
+	</div>
+	<div>
+		<p th:inline="text">顧客名　:　[[${oPEntity.getReceivingOrdersEntity().getCustomerName()}]]</p>
+		<p th:inline="text">顧客住所　:　[[${oPEntity.getReceivingOrdersEntity().getCustomerAddress()}]]</p>
+		<p th:inline="text">顧客電話番号　:　[[${oPEntity.getReceivingOrdersEntity().getCustomerTel()}]]</p>
+	</div>
+	<form action="/orders/update" method="get">
+		<input type="hidden" name="oPId" th:value="${oPEntity.getOrderProductsId()}">
+		<input type="submit" value="更新">
+	</form>
+	<form action="/orders/deleteConfirm" method="get">
+		<input type="hidden" name="oPId" th:value="${oPEntity.getOrderProductsId()}">
+		<input type="submit" value="削除">
+	</form>
+	<form action="/orders">
+		<input type="submit" value="検索一覧へ戻る">
+	</form>
+</body>
+</html>

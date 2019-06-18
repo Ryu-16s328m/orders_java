@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>会員情報詳細画面</title>
+</head>
+<body>
+	<div>
+		<p th:inline="text">氏名　:　[[${lastName}]] [[${firstName}]]</p>
+		<p th:inline="text">登録日時　:　[[${registDate}]]</p>
+		<p th:inline="text">更新日時　:　[[${updateDate}]]</p>
+		<p th:inline="text">Eメール　:　[[${email}]]</p>
+		<p th:inline="text">ログイン日時　:　[[${loginDate}]]</p>
+	</div>
+	<form action="/users/update" method="get">
+		<input type="submit" value="会員情報更新">
+	</form>
+	<form action="/orders">
+		<input type="submit" value="検索一覧へ戻る">
+	</form>
+</body>
+</html>

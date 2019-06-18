@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>受発注登録画面</title>
+</head>
+<body>
+<div th:object="${form}">
+	<form action="/orders/registConfirm" method="post">
+		<p>注文商品名<input type="text" name="oPName" th:value="${oPName}"></p>
+			<label th:if="${#fields.hasErrors('oPName')}" th:errors="*{oPName}" ></label>
+		<p>商品単価<input type="text" name="oPPrice" th:value="${oPPrice}"></p>
+			<label th:if="${#fields.hasErrors('oPPrice')}" th:errors="*{oPPrice}" ></label>
+		<p>
+			発注先会社ID
+			<select name="comId" th:value="${comId}">
+    			<option th:each="ids : ${idsList}" th:text="${ids}" th:selected="${comId}==${ids}"></option>
+			</select>
+		</p>
+		<p>発注品名<input type="text" name="oIName" th:value="${oIName}"></p>
+			<label th:if="${#fields.hasErrors('oIName')}" th:errors="*{oIName}" ></label>
+		<p>発注数<input type="text" name="oCount" th:value="${oCount}"></p>
+			<label th:if="${#fields.hasErrors('oIName')}" th:errors="*{oIName}" ></label>
+		<p>発注単価<input type="text" name="oPrice" th:value="${oPrice}"></p>
+			<label th:if="${#fields.hasErrors('oPrice')}" th:errors="*{oPrice}" ></label>
+		<p>顧客名<input type="text" name="cusName" th:value="${cusName}"></p>
+			<label th:if="${#fields.hasErrors('cusName')}" th:errors="*{cusName}" ></label>
+		<p>顧客住所<input type="text" name="cusAddress" th:value="${cusAddress}"></p>
+			<label th:if="${#fields.hasErrors('cusAddress')}" th:errors="*{cusAddress}" ></label>
+		<p>顧客電話番号<input type="text" name="cusTel" th:value="${cusTel}"></p>
+			<label th:if="${#fields.hasErrors('cusTel')}" th:errors="*{cusTel}" ></label>
+		<input type="submit" value="登録内容を確認する">
+	</form>
+	<form action="/orders" method="get">
+		<input type="submit" value="検索一覧へ戻る">
+	</form>
+</div>
+</body>
+</html>

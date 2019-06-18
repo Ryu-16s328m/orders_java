@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>会員情報更新画面</title>
+</head>
+<body>
+<div th:object="${form}">
+	<form action="/users/updateConfirm">
+		<p>苗字<input type="text" name="lastName" th:value="${lastName}" placeholder="必須"></p>
+		<label th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" ></label>
+		<p>名前<input type="text" name="firstName" th:value="${firstName}" placeholder="必須"></p>
+		<label th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" ></label>
+		<p>Eメール<input type="text" name="email" th:value="${email}" placeholder="必須"></p>
+		<label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" ></label>
+		<input type="submit" value="更新内容を確認する">
+	</form>
+</div>
+	
+	<form action="/users/detail">
+		<input type="submit" value="戻る">
+	</form>
+</body>
+</html>

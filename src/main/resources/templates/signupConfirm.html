@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>サインアップ</title>
+</head>
+<body>
+	<p th:inline="text">名前 : [[${name}]]</p>
+    <p th:inline="text">メールアドレス : [[${email}]]</p>
+    <form action="/users/doSignup" method="post">
+    	<input type="hidden" name="lastName" th:value="${lastName}">
+    	<input type="hidden" name="firstName" th:value="${firstName}">
+    	<input type="hidden" name="email" th:value="${email}">
+    	<input type="hidden" name="password" th:value="${password}">
+    	<input type="submit" value="登録">
+    </form>
+    <form action="/users/backToSignup" method="post">
+    	<input type="hidden" name="lastName" th:value="${lastName}">
+    	<input type="hidden" name="firstName" th:value="${firstName}">
+    	<input type="hidden" name="email" th:value="${email}">
+    	<input type="submit" value="戻る">
+    </form>
+</body>                                                                                           
+</html>

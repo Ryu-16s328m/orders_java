@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>会員情報更新確認画面</title>
+</head>
+<body>
+	<h1 th:inline="text">以下の内容で更新してよろしいですか？</h1>
+	<p th:inline="text">氏名　:　[[${lastName}]] [[${firstName}]]</p>
+	<p th:inline="text">Eメール　:　[[${email}]]</p>
+	
+	<form id="doUpdate" action="/users/doUpdate" method="post">
+		<input type="hidden" name="lastName" th:value="${lastName}">
+		<input type="hidden" name="firstName" th:value="${firstName}">
+		<input type="hidden" name="email" th:value="${email}">
+		<input type="hidden" name="userId" th:value="${@loginSession.getUserId()}">
+	</form>
+	<form id="back" action="/users/backToUserUpdate" method="post">
+		<input type="hidden" name="lastName" th:value="${lastName}">
+		<input type="hidden" name="firstName" th:value="${firstName}">
+		<input type="hidden" name="email" th:value="${email}">
+	</form>
+	<div>
+		<button type="submit" form="doUpdate">はい</button>
+		<button type="submit" form="back">いいえ</button>
+	</div>
+</html>
